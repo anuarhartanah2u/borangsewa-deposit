@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borang Sewa & Deposit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 1.5rem;
+        }
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            gap: 1rem;
+        }
+        .input-label {
+            flex-grow: 1;
+        }
+        .input-field {
+            width: 150px;
+            text-align: right;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+        }
+        .section-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .total-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #e5e7eb;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+        .total-label {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .total-value {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .message-box {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container py-8">
+        <div class="card">
+            <h1 class="text-xl font-bold text-center mb-4 text-gray-800">BORANG SEWA & DEPOSIT</h1>
+            
+            <!-- Header -->
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <span class="font-bold text-base">Harta Tanah:</span>
+                    <input type="text" id="property" value="EVO Soho" class="font-medium text-base bg-gray-100 p-1 rounded-md mt-1 w-full max-w-xs">
+                    <div class="mt-2">
+                         <span class="font-bold text-base">WhatsApp:</span>
+                        <input type="text" id="whatsapp" value="60123456789" class="font-medium text-base bg-gray-100 p-1 rounded-md mt-1 w-full max-w-xs">
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="font-bold text-base">Tarikh:</span>
+                    <input type="date" id="date" value="2025-09-13" class="font-medium text-base bg-gray-100 p-1 rounded-md mt-1">
+                </div>
+            </div>
+
+            <!-- Rental Details -->
+            <div class="flex justify-between items-center bg-green-700 text-white p-3 rounded-t-lg mt-4">
+                <span class="font-bold text-base">Butiran Sewa & Deposit</span>
+                <div class="flex items-center">
+                    <input type="number" id="rental-price" value="1200" class="bg-transparent text-white w-24 text-right font-bold text-base focus:outline-none">
+                    <span class="font-bold text-base ml-2">/ Bulanan</span>
+                </div>
+            </div>
+
+            <div class="border-2 border-green-700 p-4 rounded-b-lg text-sm">
+                <div class="input-group">
+                    <span class="input-label">1 Bulan Sewa Pendahuluan</span>
+                    <span class="mr-2">RM</span>
+                    <input type="number" id="advance-rental" value="1200" class="input-field">
+                </div>
+                <div class="input-group">
+                    <span class="input-label">2 Bulan Securiti Deposit</span>
+                    <span class="mr-2">RM</span>
+                    <input type="number" id="2-months-deposit" value="2400" class="input-field">
+                </div>
+                <div class="input-group">
+                    <div class="flex items-center space-x-2">
+                        <span class="input-label">Utiliti Deposit</span>
+                        <select id="utilities-multiplier" class="p-1 rounded-md bg-gray-100 border border-gray-300">
+                            <option value="0.5">0.5x</option>
+                            <option value="1">1x</option>
+                        </select>
+                    </div>
+                    <span class="mr-2">RM</span>
+                    <input type="number" id="utilities-deposit" value="600" class="input-field">
+                </div>
+                <div class="input-group">
+                    <span class="input-label">Deposit Kad Akses</span>
+                    <span class="mr-2">RM</span>
+                    <input type="number" id="access-card-deposit" value="0" class="input-field">
+                </div>
+                <div class="input-group">
+                    <span class="input-label">Lain-lain Deposit</span>
+                    <span class="mr-2">RM</span>
+                    <input type="number" id="other-deposit" value="0" class="input-field">
+                </div>
+                <div class="border-t my-4"></div>
+                
+                <!-- Subtotal Deposit -->
+                <div class="input-group font-semibold">
+                    <span>Jumlah Deposit</span>
+                    <span class="mr-2">RM</span>
+                    <span id="deposit-total">0.00</span>
+                </div>
+                
+                <div class="input-group">
+                    <div class="flex items-center space-x-2">
+                        <span class="input-label">Dokumentasi & Setem</span>
+                        <select id="documentation-percentage" class="p-1 rounded-md bg-gray-100 border border-gray-300">
+                            <option value="20">20%</option>
+                            <option value="25">25%</option>
+                            <option value="30" selected>30%</option>
+                        </select>
+                    </div>
+                    <span class="mr-2">RM</span>
+                    <input type="number" id="documentation" value="240" class="input-field">
+                </div>
+            </div>
+
+            <!-- Section for Payment -->
+            <div class="section-title">UNTUK LOCK Unit, Sila Bayar:</div>
+            <div class="p-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold text-base">A. Booking & Earnest Deposit (Termasuk 8% SST)</span>
+                        <select id="booking-multiplier" class="p-1 rounded-md bg-gray-100 border border-gray-300">
+                            <option value="1">1x</option>
+                            <option value="1.25">1.25x</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="mr-2">RM</span>
+                        <span id="booking-fee" class="font-bold">0.00</span>
+                    </div>
+                </div>
+                <p class="text-sm">Pindah ke: **Oriental Real Estate Sdn Bhd**</p>
+                <p class="text-sm">Bank: **CIMB**</p>
+                <p class="text-sm">Nombor Akaun: **8009 7113 65**</p>
+            </div>
+
+            <!-- Updated section to allow user input for Documentation & Stamping account details -->
+            <div class="p-4 mt-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg text-sm">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-base">B. Dokumen & Setem</span>
+                    <div class="flex items-center">
+                        <span class="mr-2">RM</span>
+                        <span id="documentation-fee" class="font-bold">0.00</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-label">Pindah ke:</span>
+                    <input type="text" id="documentation-account-name" value="Anuar Bin Ibrahim" class="input-field text-left w-full max-w-[200px]">
+                </div>
+                 <div class="input-group">
+                    <span class="input-label">Bank:</span>
+                    <input type="text" id="documentation-bank-name" value="Maybank" class="input-field text-left w-full max-w-[200px]">
+                </div>
+                 <div class="input-group">
+                    <span class="input-label">Nombor Akaun:</span>
+                    <input type="text" id="documentation-account-number" value="1643 4222 3916" class="input-field text-left w-full max-w-[200px]">
+                </div>
+            </div>
+
+            <div class="section-title">Baki Bayaran Kepada Pemilik</div>
+            <div class="p-4 bg-gray-200 border-2 border-gray-400 rounded-lg">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-base">C. Baki</span>
+                    <div class="flex items-center">
+                        <span class="mr-2">RM</span>
+                        <span id="remaining-balance" class="font-bold">0.00</span>
+                    </div>
+                </div>
+                <p class="text-sm">Pindah ke: **Akaun Pemilik**</p>
+                <p class="text-sm">Pindah ke: **Akan dimaklumkan**</p>
+            </div>
+
+            <!-- Total Calculation -->
+            <div class="total-box mt-4">
+                <span class="total-label">Jumlah (A + B + C)</span>
+                <div class="flex items-center">
+                    <span class="mr-2 font-bold">RM</span>
+                    <span id="grand-total" class="total-value">0.00</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center mt-6 space-x-4">
+                <button onclick="copyToClipboard()" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-blue-700 transition duration-300">
+                    Kongsi Maklumat
+                </button>
+                <a id="whatsapp-link" href="#" target="_blank" class="bg-green-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-green-700 transition duration-300 flex items-center justify-center space-x-2">
+                    <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.04 2.1c-5.26 0-9.52 4.26-9.52 9.52 0 1.76.49 3.42 1.41 4.88l-1.5 5.48 5.6-1.47c1.4.76 2.97 1.16 4.6 1.16h.02c5.26 0 9.52-4.26 9.52-9.52-.01-5.26-4.27-9.52-9.53-9.52zM17.47 16.59c-.27.7-.82 1.58-1.57 1.78-.58.15-1.12.08-1.74-.2-.62-.28-1.39-.53-2.12-.9-2.22-1.07-3.71-3.32-3.8-3.46-.09-.16-.67-.93-.67-1.77 0-.76.41-1.16.56-1.31.14-.14.3-.18.47-.18l.38.01c.14.01.37-.04.57.43.2.47.69 1.67.75 1.8.06.13.1.2.18.33.09.12.11.25.04.41-.08.15-.55.48-1.1.75-.56.27-.92.51-.92.51.13.2.27.4.4.6.14.2.3.4.45.6.15.2.3.4.47.58.17.18.34.35.53.53.25.24.46.3.62.38.15.08.31.14.47.19.16.06.27.1.4.03.14-.07.41-.18.77-.55.37-.37.59-.57.7-.64.12-.07.24-.09.4-.04.16.05 1.05.5 1.25.61.2.1.33.15.42.23.09.08.2.19.06.33z"/>
+                    </svg>
+                    <span>WhatsApp</span>
+                </a>
+                <button onclick="window.print()" class="bg-gray-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-700 transition duration-300">
+                    Cetak / Simpan PDF
+                </button>
+            </div>
+
+            <div id="status-message" class="message-box hidden"></div>
+            
+            <!-- Copyright Section -->
+            <div id="copyright-text" class="text-center text-xs text-gray-400 mt-6">
+                Copyright Hj Anuar Ver 1.0
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showStatus(message, isError = false) {
+            const statusBox = document.getElementById('status-message');
+            statusBox.innerText = message;
+            statusBox.className = isError 
+                ? 'message-box bg-red-100 text-red-600 border border-red-400' 
+                : 'message-box bg-green-100 text-green-600 border border-green-400';
+            statusBox.classList.remove('hidden');
+            setTimeout(() => {
+                statusBox.classList.add('hidden');
+            }, 5000);
+        }
+
+        function calculateTotals() {
+            const copyrightTextElement = document.getElementById('copyright-text');
+            if (!copyrightTextElement || !copyrightTextElement.innerText.includes('Copyright Hj Anuar Ver 1.0')) {
+                console.error('Error: Borang ini tidak sah. Sila pastikan teks hak cipta "Copyright Hj Anuar Ver 1.0" wujud.');
+                return; // Stop calculation
+            }
+            
+            const rentalPrice = parseFloat(document.getElementById('rental-price').value) || 0;
+
+            // Automatically update dependent fields
+            document.getElementById('advance-rental').value = rentalPrice.toFixed(2);
+            document.getElementById('2-months-deposit').value = (rentalPrice * 2).toFixed(2);
+
+            // Calculate Utiliti Deposit based on selected multiplier
+            const utilitiesMultiplier = parseFloat(document.getElementById('utilities-multiplier').value);
+            document.getElementById('utilities-deposit').value = (rentalPrice * utilitiesMultiplier).toFixed(2);
+
+            // Calculate Dokumentasi & Setem based on selected percentage
+            const documentationPercentage = parseFloat(document.getElementById('documentation-percentage').value);
+            document.getElementById('documentation').value = (rentalPrice * (documentationPercentage / 100)).toFixed(2);
+            
+            // Calculate Booking & Yuran Kunci based on selected multiplier and 8% SST
+            const bookingMultiplier = parseFloat(document.getElementById('booking-multiplier').value);
+            const bookingBase = rentalPrice * bookingMultiplier;
+            const bookingSST = bookingBase * 0.08;
+            const bookingFee = bookingBase + bookingSST;
+            document.getElementById('booking-fee').innerText = bookingFee.toFixed(2);
+
+            // Get all values to calculate totals
+            const advanceRental = parseFloat(document.getElementById('advance-rental').value) || 0;
+            const twoMonthsDeposit = parseFloat(document.getElementById('2-months-deposit').value) || 0;
+            const utilitiesDeposit = parseFloat(document.getElementById('utilities-deposit').value) || 0;
+            const accessCardDeposit = parseFloat(document.getElementById('access-card-deposit').value) || 0;
+            const otherDeposit = parseFloat(document.getElementById('other-deposit').value) || 0;
+            const documentation = parseFloat(document.getElementById('documentation').value) || 0;
+
+            const depositTotal = advanceRental + twoMonthsDeposit + utilitiesDeposit + accessCardDeposit + otherDeposit;
+            document.getElementById('deposit-total').innerText = depositTotal.toFixed(2);
+
+            const documentationFee = documentation;
+            document.getElementById('documentation-fee').innerText = documentationFee.toFixed(2);
+            
+            const remainingBalance = depositTotal - bookingFee;
+            document.getElementById('remaining-balance').innerText = remainingBalance.toFixed(2);
+            
+            const grandTotal = bookingFee + documentationFee + remainingBalance;
+            document.getElementById('grand-total').innerText = grandTotal.toFixed(2);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            const dateInput = document.getElementById('date');
+            const utilitiesMultiplier = document.getElementById('utilities-multiplier');
+            const documentationPercentage = document.getElementById('documentation-percentage');
+            const bookingMultiplier = document.getElementById('booking-multiplier');
+
+            inputs.forEach(input => {
+                input.addEventListener('input', calculateTotals);
+            });
+            textInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    updateWhatsappLink();
+                }); 
+            });
+            document.getElementById('copyright-text').addEventListener('DOMSubtreeModified', calculateTotals);
+
+            utilitiesMultiplier.addEventListener('change', calculateTotals);
+            documentationPercentage.addEventListener('change', calculateTotals);
+            bookingMultiplier.addEventListener('change', calculateTotals);
+
+            // Set today's date
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            dateInput.value = `${yyyy}-${mm}-${dd}`;
+
+            calculateTotals(); // Initial calculation on page load
+            updateWhatsappLink(); // Initial update of the WhatsApp link
+        });
+
+        function getShareText() {
+            const property = document.getElementById('property').value;
+            const date = document.getElementById('date').value;
+            const rentalPrice = parseFloat(document.getElementById('rental-price').value) || 0;
+            const advanceRental = parseFloat(document.getElementById('advance-rental').value) || 0;
+            const twoMonthsDeposit = parseFloat(document.getElementById('2-months-deposit').value) || 0;
+            const utilitiesDeposit = parseFloat(document.getElementById('utilities-deposit').value) || 0;
+            const accessCardDeposit = parseFloat(document.getElementById('access-card-deposit').value) || 0;
+            const otherDeposit = parseFloat(document.getElementById('other-deposit').value) || 0;
+            const documentation = parseFloat(document.getElementById('documentation').value) || 0;
+            const bookingFee = parseFloat(document.getElementById('booking-fee').innerText) || 0;
+            const remainingBalance = parseFloat(document.getElementById('remaining-balance').innerText) || 0;
+            const grandTotal = parseFloat(document.getElementById('grand-total').innerText) || 0;
+
+            const docAccountName = document.getElementById('documentation-account-name').value;
+            const docBankName = document.getElementById('documentation-bank-name').value;
+            const docAccountNumber = document.getElementById('documentation-account-number').value;
+
+            return `
+*BUTIRAN SEWA & DEPOSIT*
+Harta Tanah: ${property}
+Tarikh: ${date}
+Sewa: RM${rentalPrice.toFixed(2)} / Bulanan
+
+*Deposit:*
+1 Bulan Sewa Pendahuluan: RM${advanceRental.toFixed(2)}
+2 Bulan Securiti Deposit: RM${twoMonthsDeposit.toFixed(2)}
+Utiliti Deposit: RM${utilitiesDeposit.toFixed(2)}
+Deposit Kad Akses: RM${accessCardDeposit.toFixed(2)}
+Lain-lain Deposit: RM${otherDeposit.toFixed(2)}
+Dokumentasi & Setem: RM${documentation.toFixed(2)}
+
+*UNTUK LOCK Unit, Sila Bayar:*
+A. Booking & Earnest Deposit (Termasuk 8% SST): RM${bookingFee.toFixed(2)}
+Pindah ke: Oriental Real Estate Sdn Bhd
+Bank: CIMB
+Nombor Akaun: 8009 7113 65
+
+B. Dokumen & Setem: RM${documentation.toFixed(2)}
+Pindah ke: ${docAccountName}
+Bank: ${docBankName}
+Nombor Akaun: ${docAccountNumber}
+
+*Baki Bayaran Kepada Pemilik:*
+C. Baki: RM${remainingBalance.toFixed(2)}
+Pindah ke: Akaun Pemilik
+Pindah ke: Akan dimaklumkan
+
+*Jumlah (A + B + C): RM${grandTotal.toFixed(2)}*
+`;
+        }
+        
+        function copyToClipboard() {
+            const textToCopy = getShareText();
+            const messageBox = document.getElementById('status-message');
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    messageBox.innerText = 'Maklumat telah disalin ke papan klip!';
+                    messageBox.className = 'message-box bg-green-100 text-green-600 border border-green-400';
+                    messageBox.classList.remove('hidden');
+                    setTimeout(() => messageBox.classList.add('hidden'), 3000);
+                }).catch(err => {
+                    fallbackCopyTextToClipboard(textToCopy);
+                });
+            } else {
+                fallbackCopyTextToClipboard(textToCopy);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed"; 
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.width = "2em";
+            textArea.style.height = "2em";
+            textArea.style.padding = "0";
+            textArea.style.border = "none";
+            textArea.style.outline = "none";
+            textArea.style.boxShadow = "none";
+            textArea.style.background = "transparent";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                const messageBox = document.getElementById('status-message');
+                if (successful) {
+                    messageBox.innerText = 'Maklumat telah disalin ke papan klip!';
+                    messageBox.className = 'message-box bg-green-100 text-green-600 border border-green-400';
+                } else {
+                    messageBox.innerText = 'Gagal menyalin. Sila cuba secara manual.';
+                    messageBox.className = 'message-box bg-red-100 text-red-600 border border-red-400';
+                }
+                messageBox.classList.remove('hidden');
+                setTimeout(() => messageBox.classList.add('hidden'), 3000);
+            } catch (err) {
+                console.error('Fallback: Gagal menyalin teks', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        function updateWhatsappLink() {
+            const whatsappNumber = document.getElementById('whatsapp').value.replace(/\D/g, '');
+            const shareText = getShareText();
+            const whatsappLink = document.getElementById('whatsapp-link');
+            if (whatsappNumber) {
+                whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(shareText)}`;
+            } else {
+                whatsappLink.href = '#';
+            }
+        }
+    </script>
+</body>
+</html>
